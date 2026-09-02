@@ -21,17 +21,13 @@ The analysis focuses on:
 ### Project Structure
 
 ```text
-├── .github/       # GitHub configuration
-├── analytic/      # Analytical work and outputs
-├── data/          # Source and prepared datasets
-├── database/      # Data model and schema documentation
-├── docs/          # Project documentation
-├── Power BI/      # Power BI dashboard and related files
-├── XRC/           # Supporting project materials
-├── test/          # Data quality and validation work
-└── README.md      # Project overview and documentation
+├── analytics/      # Analytical work and outputs
+├── data/           # Source and prepared datasets
+├── database/       # Data model and schema documentation
+├── docs/           # Project documentation
+├── Power BI/       # Power BI dashboard and related files
+└── README.md       # Project overview and documentation
 ```
-
 ### Tools & Technologies
 
 * Power BI
