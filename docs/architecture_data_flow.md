@@ -65,5 +65,30 @@ DAX measures are used to calculate the main performance indicators, including:
 - Total Replied
 - Reply Rate
 - Invite Utilization
-
 These measures support consistent KPI reporting across the Power BI dashboard.
+## Reporting and Insight Layer
+
+The prepared star-schema model and DAX measures feed the Power BI reporting layer.
+
+The dashboards provide visibility into:
+
+- Outreach activity
+- Invitation acceptance
+- Reply performance
+- Agent performance
+- Account health
+- Ghosting indicators
+- Risk and anomaly signals
+- Outreach utilization against account limits
+
+## Architecture Summary
+
+The overall architecture supports a structured flow from raw LinkedIn outreach data to actionable analytical insights.
+
+The solution separates data preparation, data modeling, analytical calculations, and reporting to improve consistency and maintainability.
+
+## Current Scope
+
+The implemented solution focuses on Power BI-based analytics and reporting using the available LinkedIn agent activity dataset.
+
+The architecture documentation reflects the components implemented for this assessment and does not claim unimplemented production ingestion or deployment components.
