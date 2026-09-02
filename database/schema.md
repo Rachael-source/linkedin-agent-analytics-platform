@@ -1,44 +1,122 @@
-# Part 1 – Integration Baseline Evidence
+# Database Schema
 
-## Objective
+## Overview
 
-Part 1 verifies adherence to the LinkedIn Agent Analytics Platform integration and agent setup protocol.
+The LinkedIn Agent Analytics Platform uses a star-schema data model designed to support agent performance, lead activity, outreach, engagement, and risk analysis.
 
-## Evidence Summary
+## Fact Table
 
-The following screenshots document the completed Integration Baseline process on the Polluxa platform:
+### Fact Lead Activity
 
-1. Environment Access
-2. Account Sign-Up & System Navigation
-3. Initiate Connection Protocol
-4. Credential Provisioning
-5. MFA / Secure Connection Flow
-6. Agent Risk Configuration
-7. Operate Agent & Capture Live Data
+**Grain:** One record represents the activity/status information associated with a lead.
 
-## Declared Account Age Tier
+Key fields include:
 
-**Account Age Tier: 1+ Year**
+- Lead ID
+- Agent ID
+- Added On
+- Last Contacted Date/Time
+- Invite Sent At Date/Time
+- Connected At
+- Accepted
+- SDR Status
+- Comment
+- Status
+- Hot
+- Cold
+- Source
+- Prioritize
 
-According to the assessment configuration, the 1+ Year tier has a recommended maximum of:
+## Dimension Tables
 
-- Connection invites: 30 per day
-- Messages: 60 per day
+### DimLead
 
-## Step 5 – MFA / Secure Connection Flow
+Contains descriptive information about each lead.
 
-During the connection process, the expected MFA/security challenge was **not displayed** on the account.
+Fields:
 
-After selecting the connection option, the system proceeded directly to the Account Age configuration stage.
+- Lead ID
+- Name
+- Job Title
+- Company
+- Industry
+- Location
+- Source
+- Prioritize
+- LinkedIn
+- URL
 
-No MFA approval was fabricated or bypassed. The observed system behavior is documented here as a flow variation/challenge.
+### DimAgent
 
-## Step 7 – Live Data / Agent Activity
+Contains agent information.
 
-The evidence includes the existing lead and agent activity visible in the Polluxa LinkedIn environment.
+Fields:
 
-No unnecessary new lead activity was created solely for screenshot purposes.
+- Agent ID
+- Agent Name
 
-## Evidence Files
+### DimDate
 
-The screenshots in this folder provide visual evidence of the completed Part 1 workflow.
+Provides date attributes for time-based analysis.
+
+Fields:
+
+- Date ID
+- Date
+- Year
+- Month
+- Month Name
+- Day
+
+## Relationships
+
+The model follows a star-schema structure:
+
+- DimLead → Fact Lead Activity
+- DimAgent → Fact Lead Activity
+- DimDate → Fact Lead Activity
+
+Dimension tables provide descriptive context, while Fact Lead Activity contains the measurable activity data.
+
+## Data Transformation
+
+The source data was cleaned and transformed in Power Query before loading into the Power BI data model.
+
+The `Accepted` field was converted from Yes/No values to numeric values:
+
+- Yes = 1
+- No = 0
+
+This allows acceptance metrics and rates to be calculated consistently in Power BI.
+
+## Key Measures
+
+Examples of analytical measures include:
+
+- Total Leads
+- Total Invites Sent
+- Total Accepted
+- Accepted Rate
+- Total Connected
+- Total Replied
+- Reply Rate
+- Invite Utilization
+
+## Data Model Purpose
+
+The schema supports:
+
+- Agent performance analysis
+- Lead activity monitoring
+- Invitation and acceptance analysis
+- Reply and engagement analysis
+- Account health monitoring
+- Risk and anomaly analysis
+- Power BI dashboard reporting
+
+## Known Data Limitations
+
+- The source dataset contains a limited observation period.
+- The available time series is insufficient for statistically meaningful long-term trend or reply-decay analysis.
+- Campaign identifiers, campaign costs, and revenue fields are not available; therefore, true Campaign ROI cannot be calculated.
+- The Source field contains only one observed value, `Build Search`, preventing meaningful source/campaign comparison.
