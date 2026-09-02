@@ -118,5 +118,70 @@ The schema supports:
 
 - The source dataset contains a limited observation period.
 - The available time series is insufficient for statistically meaningful long-term trend or reply-decay analysis.
+- ### DimDate
+
+Provides date attributes for time-based analysis.
+
+Fields:
+
+- Date ID
+- Date
+- Year
+- Month
+- Month Name
+- Day
+
+## Relationships
+
+The model follows a star-schema structure:
+
+- DimLead → Fact Lead Activity
+- DimAgent → Fact Lead Activity
+- DimDate → Fact Lead Activity
+
+Dimension tables provide descriptive context, while Fact Lead Activity contains the measurable activity data.
+
+## Data Transformation
+
+The source data was cleaned and transformed in Power Query before loading into the Power BI data model.
+
+The `Accepted` field was converted from Yes/No values to numeric values:
+
+- Yes = 1
+- No = 0
+
+This allows acceptance metrics and rates to be calculated consistently in Power BI.
+
+## Key Measures
+
+Examples of analytical measures include:
+
+- Total Leads
+- Total Invites Sent
+- Total Accepted
+- Accepted Rate
+- Total Connected
+- Total Replied
+- Reply Rate
+- Invite Utilization
+
+## Data Model Purpose
+
+The schema supports:
+
+- Agent performance analysis
+- Lead activity monitoring
+- Invitation and acceptance analysis
+- Reply and engagement analysis
+- Account health monitoring
+- Risk and anomaly analysis
+- Power BI dashboard reporting
+
+## Known Data Limitations
+
+- The source dataset contains a limited observation period.
+- The available time series is insufficient for statistically meaningful long-term trend or reply-decay analysis.
+- Campaign identifiers, campaign costs, and revenue fields are not available; therefore, true Campaign ROI cannot be calculated.
+- The Source field contains only one observed value, `Build Search`, preventing meaningful source/campaign comparison.
 - Campaign identifiers, campaign costs, and revenue fields are not available; therefore, true Campaign ROI cannot be calculated.
 - The Source field contains only one observed value, `Build Search`, preventing meaningful source/campaign comparison.
